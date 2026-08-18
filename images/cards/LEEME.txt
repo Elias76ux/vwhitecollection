@@ -1,0 +1,15 @@
+Imágenes finales de las cartas (PNG, fondo blanco sólido), generadas con
+tools/procesar-cartas.ps1 a partir de las fotos en Pictures/.
+
+Para añadir cartas nuevas fotografiadas sobre fondo claro/uniforme (como
+las de Pictures/), no hace falta marcar esquinas a mano:
+
+  powershell -File tools/procesar-cartas.ps1 -Mode whitebg -SourceDir Pictures -OutDir images/cards -Pattern *.JPG -MaxSize 900 -Threshold 60
+
+Si el fondo de las fotos nuevas no es uniforme (mesa, etc.), usa el flujo
+de 2 pasos con esquinas manuales — ver cabecera de tools/procesar-cartas.ps1.
+
+Para revisar muchas cartas nuevas de un vistazo (leer nombres) antes de
+añadirlas al array CARDS en js/script.js, genera una hoja de contacto:
+
+  powershell -File tools/procesar-cartas.ps1 -Mode grid -SourceDir images/cards -OutDir images/_grids -Pattern *.png

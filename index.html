@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VWHITECOLLECTION · Megacracks 2026</title>
+<meta name="description" content="Colección de cartas Megacracks 2026 y más. Descubre nuestras cartas y únete a la comunidad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#inicio" class="logo">
+      <svg class="logo-icon" viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="1" y="1" width="22" height="30" rx="3" fill="currentColor"/>
+        <rect x="4.5" y="5" width="15" height="10" rx="1.2" fill="var(--white)" opacity="0.9"/>
+        <rect x="4.5" y="18" width="15" height="2" rx="1" fill="var(--white)" opacity="0.7"/>
+        <rect x="4.5" y="22" width="9" height="2" rx="1" fill="var(--white)" opacity="0.7"/>
+      </svg>
+      <span class="brand-mark"><em class="b-v">V</em><em class="b-white">White</em><em class="b-collections">Collections</em></span>
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#inicio" data-i18n="navInicio">Inicio</a>
+      <a href="#cartas" data-i18n="navCartas">Cartas</a>
+      <a href="#eventos" data-i18n="navEventos">Eventos</a>
+      <a href="#comunidad" data-i18n="navComunidad">Comunidad</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="account-btn" id="accountBtn" aria-label="Mi cuenta" aria-haspopup="dialog" aria-controls="authDrawer">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="12" cy="8.5" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M4.5 19.5c1.6-3.4 4.3-5 7.5-5s5.9 1.6 7.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <span class="account-label" id="accountLabel">Cuenta</span>
+      </button>
+
+      <button class="cart-btn" id="cartBtn" aria-label="Abrir carrito" aria-haspopup="dialog" aria-controls="cartDrawer">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 4h2l1.6 10.6a2 2 0 0 0 2 1.7h8.6a2 2 0 0 0 2-1.6L21 8H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="9.5" cy="20" r="1.4" fill="currentColor"/>
+          <circle cx="17.5" cy="20" r="1.4" fill="currentColor"/>
+        </svg>
+        <span class="cart-count" id="cartCount" hidden>0</span>
+      </button>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainNav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" id="inicio">
+    <div class="hero-cards" aria-hidden="true">
+      <span class="floating-card fc-1"></span>
+      <span class="floating-card fc-2"></span>
+      <span class="floating-card fc-3"></span>
+      <span class="floating-card fc-4"></span>
+    </div>
+    <div class="container hero-content reveal">
+      <p class="eyebrow" data-i18n="heroEyebrow">Temporada 2026</p>
+      <h1 data-i18n="heroTitle">La colección definitiva<br>de <span>Megacracks 2026</span></h1>
+      <p class="hero-subtitle" data-i18n="heroSubtitle">
+        Encuentra tus cartas favoritas, añádelas al carrito y paga de forma
+        segura. Descubre también nuestros eventos online y únete a una
+        comunidad de coleccionistas con cartas del Mundial 2026 y más.
+      </p>
+      <div class="hero-actions">
+        <a href="#cartas" class="btn btn-primary" data-i18n="heroBtnCartas">Ver cartas</a>
+        <a href="#comunidad" class="btn btn-outline" data-i18n="heroBtnComunidad">Únete a la comunidad</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cartas" id="cartas">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="eyebrow" data-i18n="cartasEyebrow">Catálogo</p>
+        <h2 data-i18n="cartasTitle">Nuestras cartas</h2>
+        <p class="section-desc">
+          Colección Megacracks 2026 de Lamine Yamal, más nuestras primeras
+          cartas del Mundial 2026. Muy pronto sumaremos otras colecciones.
+        </p>
+      </div>
+
+      <div class="filters reveal" id="filters">
+        <button class="filter-btn is-active" data-filter="megacracks">Megacracks 2026</button>
+        <button class="filter-btn" data-filter="mundial">Mundial 2026</button>
+        <button class="filter-btn" data-filter="otras">Otras colecciones</button>
+      </div>
+
+      <p class="price-disclaimer reveal">* Precios orientativos — pendientes de confirmar.</p>
+
+      <div class="cards-grid" id="cardsGrid"></div>
+
+      <p class="empty-state" id="emptyState" hidden>
+        Próximamente disponible en esta colección. ¡Vuelve pronto!
+      </p>
+    </div>
+  </section>
+
+  <section class="eventos" id="eventos">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="eyebrow" data-i18n="eventosEyebrow">Eventos</p>
+        <h2 data-i18n="eventosTitle">Eventos online</h2>
+        <p class="section-desc">
+          Participa en nuestros eventos online, incluida la gala de premios
+          para los mejores coleccionistas de la comunidad.
+        </p>
+      </div>
+
+      <div class="events-grid">
+        <article class="event-card event-card-featured reveal">
+          <span class="event-badge">Evento destacado</span>
+          <h3>Gala de Premios al Mejor Coleccionista 2026</h3>
+          <p class="event-date">📅 Fecha por confirmar · Online</p>
+          <p>
+            Una gala online para celebrar a los mejores coleccionistas de la
+            comunidad: mejor colección, mayor actividad y sorteos especiales
+            de cartas exclusivas entre los asistentes.
+          </p>
+          <button type="button" class="btn btn-primary event-signup-btn" data-event="Gala de Premios al Mejor Coleccionista 2026" aria-haspopup="dialog" aria-controls="eventDrawer">Apuntarme</button>
+        </article>
+
+        <article class="event-card reveal">
+          <span class="event-badge event-badge-soon">Próximamente</span>
+          <h3>Sorteo de cartas exclusivas</h3>
+          <p class="event-date">📅 Fecha por confirmar · Online</p>
+          <p>
+            Nuevo evento en preparación. Anunciaremos los detalles en la
+            comunidad de Telegram.
+          </p>
+        </article>
+      </div>
+
+      <p class="events-note">* Fechas y detalles pendientes de confirmar — se anunciarán en el canal de Telegram.</p>
+    </div>
+  </section>
+
+  <section class="comunidad" id="comunidad">
+    <div class="container comunidad-inner">
+      <div class="comunidad-text reveal">
+        <p class="eyebrow eyebrow-light" data-i18n="comunidadEyebrow">Comunidad</p>
+        <h2 data-i18n="comunidadTitle">Habla con otros coleccionistas</h2>
+        <p>
+          Únete a nuestra comunidad para resolver dudas sobre cartas y
+          precios, enterarte antes que nadie de nuevas colecciones
+          disponibles, y hacer intercambios con otros coleccionistas de
+          Megacracks 2026.
+        </p>
+        <ul class="comunidad-list">
+          <li>Chat directo con el equipo y otros coleccionistas</li>
+          <li>Novedades de stock y nuevas cartas</li>
+          <li>Ayuda para encontrar cartas concretas</li>
+        </ul>
+      </div>
+
+      <div class="comunidad-card reveal">
+        <svg class="telegram-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="12" cy="12" r="12" fill="var(--white)"/>
+          <path d="M17.7 6.3 5.9 11.1c-.8.3-.8.9-.1 1.1l2.9.9 1.1 3.5c.1.4.3.5.6.5.3 0 .4-.1.6-.3l1.6-1.6 2.9 2.2c.5.3 .9.2 1-.4l1.9-9.3c.2-.7-.2-1-.9-.7z" fill="var(--primary)"/>
+        </svg>
+        <h3>Canal de Telegram</h3>
+        <p>Novedades, chat y soporte directo con la comunidad.</p>
+        <a href="https://t.me/algoritmofutbolistico" class="btn btn-telegram" target="_blank" rel="noopener">
+          Unirme al Telegram
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <span>© 2026 VWHITECOLLECTION</span>
+    <span data-i18n="footerTagline">Cartas Megacracks 2026 y colecciones futuras</span>
+    <button type="button" class="footer-legal-btn" data-open-legal data-i18n="footerLegal">Aviso legal</button>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay" hidden></div>
+
+<aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+  <div class="cart-drawer-head">
+    <h3>Tu carrito</h3>
+    <button class="icon-btn" id="cartCloseBtn" aria-label="Cerrar carrito">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <p class="cart-empty" id="cartEmpty">Tu carrito está vacío.</p>
+  <div class="cart-drawer-foot">
+    <div class="cart-total">
+      <span>Total</span>
+      <strong id="cartTotal">0,00 €</strong>
+    </div>
+    <button class="btn btn-primary cart-checkout-btn" id="checkoutBtn" aria-expanded="false" aria-controls="paymentPanel">
+      Finalizar compra
+    </button>
+
+    <div class="payment-panel" id="paymentPanel">
+      <div class="payment-panel-inner">
+        <div class="pay-tabs" id="payTabs">
+          <button class="pay-tab is-active" data-pay="paypal">PayPal</button>
+          <button class="pay-tab" data-pay="card">Tarjeta</button>
+          <button class="pay-tab" data-pay="applepay">Apple Pay</button>
+        </div>
+
+        <div class="pay-panel" id="payPanelPaypal">
+          <p class="pay-desc">Pagarás de forma segura a través de PayPal, sin salir de tu cuenta.</p>
+          <button class="btn btn-paypal pay-submit" type="button">Continuar con PayPal</button>
+        </div>
+
+        <div class="pay-panel" id="payPanelCard" hidden>
+          <p class="pay-desc">Pago con tarjeta de crédito o débito.</p>
+          <form class="card-form" id="cardForm">
+            <label>Número de tarjeta
+              <input type="text" inputmode="numeric" maxlength="19" placeholder="0000 0000 0000 0000" autocomplete="off">
+            </label>
+            <div class="card-form-row">
+              <label>Caducidad
+                <input type="text" maxlength="5" placeholder="MM/AA" autocomplete="off">
+              </label>
+              <label>CVV
+                <input type="text" inputmode="numeric" maxlength="4" placeholder="123" autocomplete="off">
+              </label>
+            </div>
+            <button class="btn btn-primary pay-submit" type="submit">Pagar ahora</button>
+          </form>
+        </div>
+
+        <div class="pay-panel" id="payPanelApplepay" hidden>
+          <p class="pay-desc">Confirma el pago con Face ID o Touch ID.</p>
+          <button class="btn btn-applepay pay-submit" type="button"> Pay</button>
+        </div>
+
+        <p class="pay-demo-note">
+          * Pasarela en modo demostración. Para cobros reales hay que conectar
+          las cuentas de PayPal, Stripe/Redsys y Apple Pay en un backend seguro.
+        </p>
+
+        <div class="pay-confirmation" id="payConfirmation" hidden>
+          <p>¡Gracias por tu compra! (modo demostración)</p>
+          <button class="btn btn-outline-dark" id="payConfirmationCloseBtn" type="button">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<aside class="event-drawer" id="eventDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="eventDrawerTitle">
+  <div class="cart-drawer-head">
+    <h3 id="eventDrawerTitle">Apúntate al evento</h3>
+    <button class="icon-btn" id="eventCloseBtn" aria-label="Cerrar formulario">&times;</button>
+  </div>
+  <form class="event-form" id="eventForm">
+    <p class="event-form-event" id="eventFormEventName"></p>
+    <label>Nombre
+      <input type="text" name="nombre" required autocomplete="name">
+    </label>
+    <label>Datos de contacto (email o teléfono)
+      <input type="text" name="contacto" required autocomplete="email">
+    </label>
+    <label>Observaciones
+      <textarea name="observaciones" rows="3" placeholder="Opcional"></textarea>
+    </label>
+    <p class="event-form-note">Al enviar se abrirá tu app de correo con los datos ya rellenados — solo tendrás que pulsar enviar.</p>
+    <button class="btn btn-primary" type="submit">Enviar inscripción</button>
+  </form>
+</aside>
+
+<aside class="auth-drawer" id="authDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="authDrawerTitle">
+  <div class="cart-drawer-head">
+    <h3 id="authDrawerTitle">Mi cuenta</h3>
+    <button class="icon-btn" id="authCloseBtn" aria-label="Cerrar">&times;</button>
+  </div>
+
+  <div class="auth-body" id="authBody">
+    <div class="auth-tabs" id="authTabs">
+      <button class="auth-tab is-active" type="button" data-auth="login">Iniciar sesión</button>
+      <button class="auth-tab" type="button" data-auth="register">Crear cuenta</button>
+    </div>
+
+    <form class="auth-form" id="loginForm">
+      <label>Email
+        <input type="email" name="email" required autocomplete="email">
+      </label>
+      <label>Contraseña
+        <input type="password" name="password" required autocomplete="current-password" minlength="6">
+      </label>
+      <p class="auth-error" id="loginError" hidden></p>
+      <button class="btn btn-primary" type="submit">Iniciar sesión</button>
+    </form>
+
+    <form class="auth-form" id="registerForm" hidden>
+      <label>Nombre
+        <input type="text" name="nombre" required autocomplete="name">
+      </label>
+      <label>Email
+        <input type="email" name="email" required autocomplete="email">
+      </label>
+      <label>Contraseña
+        <input type="password" name="password" required autocomplete="new-password" minlength="6">
+      </label>
+      <p class="auth-error" id="registerError" hidden></p>
+      <button class="btn btn-primary" type="submit">Crear cuenta</button>
+    </form>
+  </div>
+
+  </div>
+</aside>
+
+<div class="profile-modal" id="profileModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="profileModalTitle" hidden>
+  <div class="profile-modal-inner">
+    <div class="cart-drawer-head">
+      <h3 id="profileModalTitle">Mi perfil</h3>
+      <button class="icon-btn" id="profileCloseBtn" aria-label="Cerrar">&times;</button>
+    </div>
+
+    <div class="profile-modal-body">
+      <nav class="profile-nav" id="profileNav">
+        <button class="profile-nav-btn is-active" type="button" data-tab="cuenta">Datos de la cuenta</button>
+        <button class="profile-nav-btn" type="button" data-tab="config">Configuración</button>
+        <button class="profile-nav-btn" type="button" data-tab="colecciones">Mis colecciones</button>
+        <button class="profile-nav-btn" type="button" data-open-legal>Aviso legal</button>
+        <button class="profile-nav-btn profile-nav-logout" type="button" id="profileLogoutBtn">Cerrar sesión</button>
+      </nav>
+
+      <div class="profile-content">
+        <section class="profile-tab" data-tab-panel="cuenta">
+          <h4>Datos de la cuenta</h4>
+          <form class="profile-account-form" id="accountDataForm">
+            <label>Nombre
+              <input type="text" id="accountNameInput" autocomplete="name">
+            </label>
+            <label>Correo
+              <input type="email" id="accountEmailInput" disabled>
+            </label>
+            <button class="btn btn-primary" type="submit">Guardar cambios</button>
+            <p class="profile-save-note" id="accountSaveNote" hidden>Guardado.</p>
+          </form>
+        </section>
+
+        <section class="profile-tab" data-tab-panel="config" hidden>
+          <h4>Configuración</h4>
+          <label class="profile-setting">
+            Idioma
+            <select id="langSelect">
+              <option value="es">Español</option>
+              <option value="en">English</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="profile-tab" data-tab-panel="colecciones" hidden>
+          <h4>Mis colecciones</h4>
+          <p class="profile-desc">Añade tus propias cartas: una imagen y una descripción. Solo tú puedes verlas y gestionarlas.</p>
+
+          <button class="btn btn-outline-dark" id="addCollectionItemBtn" type="button">+ Añadir carta</button>
+
+          <form class="collection-form" id="collectionForm" hidden>
+            <label>Imagen
+              <input type="file" accept="image/*" id="collectionImageInput" required>
+            </label>
+            <img class="collection-preview" id="collectionPreview" hidden alt="Vista previa">
+            <label>Nombre de la carta
+              <input type="text" id="collectionNameInput" required maxlength="60">
+            </label>
+            <label>Descripción
+              <textarea id="collectionDescInput" rows="3" maxlength="300"></textarea>
+            </label>
+            <p class="collection-error" id="collectionError" hidden></p>
+            <div class="collection-form-actions">
+              <button class="btn btn-primary" type="submit">Guardar carta</button>
+              <button class="btn btn-outline-dark" type="button" id="cancelCollectionItemBtn">Cancelar</button>
+            </div>
+          </form>
+
+          <div class="collection-grid" id="collectionGrid"></div>
+          <p class="collection-empty" id="collectionEmpty" hidden>Todavía no has añadido ninguna carta.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="legal-modal" id="legalModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="legalModalTitle" hidden>
+  <div class="legal-modal-inner">
+    <div class="cart-drawer-head">
+      <h3 id="legalModalTitle">Aviso legal</h3>
+      <button class="icon-btn" id="legalCloseBtn" aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="legal-text">
+      <p><strong>Nota:</strong> texto pendiente de revisión legal definitiva; los campos entre corchetes deben sustituirse por los datos reales del titular.</p>
+
+      <h5>1. Datos identificativos</h5>
+      <p>
+        En cumplimiento del deber de información de la Ley 34/2002, de
+        Servicios de la Sociedad de la Información y Comercio Electrónico
+        (LSSI-CE), se informa de que este sitio web es titularidad de
+        [RAZÓN SOCIAL O NOMBRE DEL TITULAR], con NIF/CIF [NIF/CIF],
+        domicilio en [DOMICILIO], y correo de contacto
+        vwhitecollections@gmail.com.
+      </p>
+
+      <h5>2. Objeto</h5>
+      <p>
+        VWHITECOLLECTION es una tienda online de venta de cartas
+        coleccionables. El acceso y uso del sitio atribuye la condición de
+        usuario e implica la aceptación de este aviso legal.
+      </p>
+
+      <h5>3. Condiciones de uso</h5>
+      <p>
+        El usuario se compromete a hacer un uso adecuado y lícito del
+        sitio web, de sus contenidos y servicios, de acuerdo con la
+        legislación vigente, este aviso legal y las normas de convivencia
+        y buenas costumbres generalmente aceptadas.
+      </p>
+
+      <h5>4. Propiedad intelectual e industrial</h5>
+      <p>
+        Los contenidos del sitio (textos, imágenes de las cartas, diseño,
+        marca y logotipo) son propiedad de VWHITECOLLECTION o de terceros
+        que han autorizado su uso, y están protegidos por la normativa de
+        propiedad intelectual e industrial. Queda prohibida su
+        reproducción o distribución sin autorización expresa.
+      </p>
+
+      <h5>5. Contenido añadido por usuarios ("Mis colecciones")</h5>
+      <p>
+        Las imágenes y descripciones que un usuario registrado añada a su
+        propio apartado de "Mis colecciones" son responsabilidad exclusiva
+        de dicho usuario, que garantiza contar con los derechos necesarios
+        sobre el contenido subido. Este contenido es privado: solo lo
+        puede ver y gestionar el usuario que lo creó.
+      </p>
+
+      <h5>6. Limitación de responsabilidad</h5>
+      <p>
+        VWHITECOLLECTION no garantiza la disponibilidad continua del
+        sitio ni se responsabiliza de daños derivados de la falta de
+        disponibilidad o de errores en el acceso. Los precios mostrados
+        son orientativos y están pendientes de confirmación, tal como se
+        indica en la propia página.
+      </p>
+
+      <h5>7. Legislación aplicable</h5>
+      <p>
+        Estas condiciones se rigen por la legislación española. Para
+        cualquier controversia derivada del uso del sitio, las partes se
+        someten a los juzgados y tribunales que correspondan conforme a
+        derecho.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+<script src="js/eventos.js"></script>
+<script src="js/i18n.js"></script>
+<script type="module" src="js/auth.js"></script>
+<script type="module" src="js/collection.js"></script>
+</body>
+</html>
