@@ -37,19 +37,22 @@ datos de tarjeta a un servidor propio sin tokenización del proveedor.
 - Logo/título con tipografía Anton y wordmark de colores: "V" y
   "Collections" en dorado, "White" en blanco (ver `.brand-mark` en
   `css/styles.css`, aplicado en el header de `index.html`).
-- Sección "Cartas" con 80 cartas reales en `js/script.js` (array `CARDS`),
+- Sección "Cartas" con 42 cartas reales en `js/script.js` (array `CARDS`),
   fotografiadas por el usuario con fondo blanco de estudio (carpeta
   `Pictures/`, JPG): 8 en "Mundial 2026" (stickers Extra Sticker FIFA World
-  Cup 26 de selecciones) y 72 en "Megacracks 2026" (cartas MGK 2025/26,
+  Cup 26 de selecciones) y 34 en "Megacracks 2026" (cartas MGK 2025/26,
   varios jugadores/equipos de LaLiga — Barcelona, Real Madrid, Atlético,
   Athletic). La pestaña "Otras colecciones" sigue vacía ("Próximamente").
-  De las 100 fotos originales en `Pictures/`, ~20 se excluyeron por ser
-  reversos genéricos sin nombre legible o fotos con demasiado reflejo del
-  plástico protector. Nombres/descripciones identificados visualmente por
-  Claude a partir de las fotos — **revisar y confirmar con el usuario**,
-  especialmente las cartas marcadas "(dorso)" (foto del reverso, no del
-  frente) y las de nombre incierto. Los precios son estimaciones de ejemplo
-  (marcadas con "*" en la web) y deben confirmarse.
+  Solo se muestran caras frontales: el usuario proporcionó el listado
+  exacto de fotos frontales (carpeta de Drive con 51 archivos, sin las
+  fotos de reverso) y con eso se depuraron 38 cartas que en realidad eran
+  fotos del reverso — varias de ellas sin el marcador "(dorso)" en el
+  nombre original, detectado comparando cada foto contra ese listado y
+  confirmado visualmente. Sus imágenes se borraron de `images/cards/`.
+  Nombres/descripciones identificados visualmente por Claude a partir de
+  las fotos — **revisar y confirmar con el usuario** las de nombre
+  incierto. Los precios son estimaciones de ejemplo (marcadas con "*" en
+  la web) y deben confirmarse.
 - Fotos de cartas: dos flujos en `tools/procesar-cartas.ps1` según el tipo
   de foto de origen (ver cabecera del script para el uso completo):
   - `-Mode whitebg`: para fotos JPG sobre fondo claro/uniforme (como
@@ -105,9 +108,12 @@ datos de tarjeta a un servidor propio sin tokenización del proveedor.
   - Activar **Firestore Database** (modo nativo) en Firebase Console y
     pegar las reglas de seguridad de `js/collection.js` — si no, "Mis
     colecciones" no funcionará.
-  - Cuando el sitio se despliegue a un dominio real, añadirlo en Firebase
-    Console → Authentication → Settings → Authorized domains (por
-    defecto solo `localhost` y `*.firebaseapp.com` están autorizados).
+  - El sitio está publicado en GitHub Pages:
+    https://elias76ux.github.io/vwhitecollection/ (repo:
+    https://github.com/Elias76ux/vwhitecollection, rama `master`).
+    Pendiente: añadir `elias76ux.github.io` en Firebase Console →
+    Authentication → Settings → Authorized domains (por defecto solo
+    `localhost` y `*.firebaseapp.com` están autorizados).
   - Ver nota de servidor local más arriba para poder probar todo esto en
     desarrollo (afecta a `js/auth.js` y `js/collection.js`, no a
     `js/i18n.js`, que sí funciona abriendo `index.html` directamente).
