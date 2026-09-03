@@ -31,9 +31,16 @@ Modo "grid": junta varias imagenes ya procesadas en una hoja de contacto
 con numeros, para poder revisar/leer muchas cartas de un vistazo.
 
   powershell -File tools/procesar-cartas.ps1 -Mode grid -SourceDir images/cards -OutDir images/_grids -Pattern *.png
+
+Modo "transparentbg": toma PNGs ya procesados con -Mode whitebg (fondo
+blanco solido) y quita ese fondo dejandolo transparente, recortando
+ajustado a lo que quede (la funda con la carta dentro). Sobrescribe los
+archivos de origen si SourceDir y OutDir coinciden.
+
+  powershell -File tools/procesar-cartas.ps1 -Mode transparentbg -SourceDir images/cards -OutDir images/cards -Pattern mgk-*.png
 #>
 param(
-  [ValidateSet("preview", "polygon", "whitebg", "grid")]
+  [ValidateSet("preview", "polygon", "whitebg", "grid", "transparentbg")]
   [string]$Mode = "preview",
   [string]$SourceDir = "images",
   [string]$OutDir = "images/_preview",
@@ -277,6 +284,159 @@ function ConvertTo-WhiteBackground($bmp, [int]$threshold) {
   return New-Object System.Drawing.Rectangle($minX, $minY, ($maxX - $minX + 1), ($maxY - $minY + 1))
 }
 
+function ConvertTo-TransparentBackground($bmp, [int]$threshold) {
+  # Solo vuelve transparente el fondo que esta conectado con el borde de la
+  # imagen (flood fill), para no tocar blancos interiores de la propia
+  # carta (camisetas, bordes de la carta, textos, etc.) que coincidan por
+  # color con el fondo pero no formen parte de el.
+  $w = $bmp.Width
+  $h = $bmp.Height
+  $rect = New-Object System.Drawing.Rectangle(0, 0, $w, $h)
+  $data = $bmp.LockBits($rect, [System.Drawing.Imaging.ImageLockMode]::ReadWrite, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+  $stride = $data.Stride
+  $bytes = New-Object byte[] ($stride * $h)
+  [System.Runtime.InteropServices.Marshal]::Copy($data.Scan0, $bytes, 0, $bytes.Length)
+
+  $sampleSize = 14
+  $sum = @(0.0, 0.0, 0.0)
+  $count = 0
+  $corners = @(
+    @(0, 0), @(($w - $sampleSize), 0), @(0, ($h - $sampleSize)), @(($w - $sampleSize), ($h - $sampleSize))
+  )
+  foreach ($c in $corners) {
+    $cx = [Math]::Max(0, $c[0]); $cy = [Math]::Max(0, $c[1])
+    for ($y = $cy; $y -lt [Math]::Min($h, $cy + $sampleSize); $y++) {
+      $rowOff = $y * $stride
+      for ($x = $cx; $x -lt [Math]::Min($w, $cx + $sampleSize); $x++) {
+        $off = $rowOff + $x * 4
+        $sum[0] += $bytes[$off]
+        $sum[1] += $bytes[$off + 1]
+        $sum[2] += $bytes[$off + 2]
+        $count++
+      }
+    }
+  }
+  $bgB = $sum[0] / $count
+  $bgG = $sum[1] / $count
+  $bgR = $sum[2] / $count
+
+  $softBand = $threshold * 1.8
+  $pixelCount = $w * $h
+
+  function Test-BgColor($off, [byte[]]$bytes, $bgB, $bgG, $bgR, $limit) {
+    $b = $bytes[$off]; $g2 = $bytes[$off + 1]; $r = $bytes[$off + 2]
+    $db = $b - $bgB; $dg = $g2 - $bgG; $dr = $r - $bgR
+    return [Math]::Sqrt($db * $db + $dg * $dg + $dr * $dr) -lt $limit
+  }
+
+  $isBg = New-Object bool[] $pixelCount
+  $visited = New-Object bool[] $pixelCount
+  $queue = New-Object System.Collections.Generic.Queue[int]
+
+  for ($x = 0; $x -lt $w; $x++) {
+    foreach ($y in @(0, ($h - 1))) {
+      $idx = $y * $w + $x
+      if (-not $visited[$idx]) {
+        $visited[$idx] = $true
+        $off = $y * $stride + $x * 4
+        if (Test-BgColor $off $bytes $bgB $bgG $bgR $threshold) {
+          $isBg[$idx] = $true
+          $queue.Enqueue($idx)
+        }
+      }
+    }
+  }
+  for ($y = 0; $y -lt $h; $y++) {
+    foreach ($x in @(0, ($w - 1))) {
+      $idx = $y * $w + $x
+      if (-not $visited[$idx]) {
+        $visited[$idx] = $true
+        $off = $y * $stride + $x * 4
+        if (Test-BgColor $off $bytes $bgB $bgG $bgR $threshold) {
+          $isBg[$idx] = $true
+          $queue.Enqueue($idx)
+        }
+      }
+    }
+  }
+
+  while ($queue.Count -gt 0) {
+    $idx = $queue.Dequeue()
+    $px = $idx % $w
+    $py = [int](($idx - $px) / $w)
+
+    $neighbors = @(
+      @(($px - 1), $py), @(($px + 1), $py), @($px, ($py - 1)), @($px, ($py + 1))
+    )
+    foreach ($n in $neighbors) {
+      $nx = $n[0]; $ny = $n[1]
+      if ($nx -lt 0 -or $nx -ge $w -or $ny -lt 0 -or $ny -ge $h) { continue }
+      $nIdx = $ny * $w + $nx
+      if ($visited[$nIdx]) { continue }
+      $visited[$nIdx] = $true
+      $nOff = $ny * $stride + $nx * 4
+      if (Test-BgColor $nOff $bytes $bgB $bgG $bgR $threshold) {
+        $isBg[$nIdx] = $true
+        $queue.Enqueue($nIdx)
+      }
+    }
+  }
+
+  $minX = $w; $minY = $h; $maxX = 0; $maxY = 0
+
+  for ($y = 0; $y -lt $h; $y++) {
+    $rowOff = $y * $stride
+    $rowIdx = $y * $w
+    for ($x = 0; $x -lt $w; $x++) {
+      $off = $rowOff + $x * 4
+      $idx = $rowIdx + $x
+
+      if ($isBg[$idx]) {
+        $bytes[$off + 3] = 0
+      }
+      else {
+        $b = $bytes[$off]; $g2 = $bytes[$off + 1]; $r = $bytes[$off + 2]
+        $db = $b - $bgB; $dg = $g2 - $bgG; $dr = $r - $bgR
+        $dist = [Math]::Sqrt($db * $db + $dg * $dg + $dr * $dr)
+
+        $nearBg = $false
+        if ($dist -lt $softBand) {
+          if ($x -gt 0 -and $isBg[$idx - 1]) { $nearBg = $true }
+          elseif ($x -lt ($w - 1) -and $isBg[$idx + 1]) { $nearBg = $true }
+          elseif ($y -gt 0 -and $isBg[$idx - $w]) { $nearBg = $true }
+          elseif ($y -lt ($h - 1) -and $isBg[$idx + $w]) { $nearBg = $true }
+        }
+
+        if ($nearBg -and $dist -lt $softBand) {
+          $t = [Math]::Max(0.0, ($dist - $threshold) / ($softBand - $threshold))
+          $bytes[$off + 3] = [byte](255 * [Math]::Min(1.0, $t))
+        }
+        else {
+          $bytes[$off + 3] = 255
+        }
+      }
+
+      if ($bytes[$off + 3] -gt 10) {
+        if ($x -lt $minX) { $minX = $x }
+        if ($x -gt $maxX) { $maxX = $x }
+        if ($y -lt $minY) { $minY = $y }
+        if ($y -gt $maxY) { $maxY = $y }
+      }
+    }
+  }
+
+  [System.Runtime.InteropServices.Marshal]::Copy($bytes, 0, $data.Scan0, $bytes.Length)
+  $bmp.UnlockBits($data)
+
+  $pad = 6
+  $minX = [Math]::Max(0, $minX - $pad)
+  $minY = [Math]::Max(0, $minY - $pad)
+  $maxX = [Math]::Min($w - 1, $maxX + $pad)
+  $maxY = [Math]::Min($h - 1, $maxY + $pad)
+
+  return New-Object System.Drawing.Rectangle($minX, $minY, ($maxX - $minX + 1), ($maxY - $minY + 1))
+}
+
 function New-ContactSheet($files, $outPath, [int]$cols, [int]$rows, [int]$cellSize) {
   $perSheet = $cols * $rows
   $sheetIndex = 0
@@ -373,4 +533,26 @@ elseif ($Mode -eq "grid") {
   $files = Get-ChildItem -Path $SourceDir -Filter $Pattern | Sort-Object Name
   $outPath = Join-Path $OutDir "grid.png"
   New-ContactSheet $files $outPath $GridCols $GridRows 260
+}
+elseif ($Mode -eq "transparentbg") {
+  $files = Get-ChildItem -Path $SourceDir -Filter $Pattern | Sort-Object Name
+  $i = 0
+  foreach ($f in $files) {
+    $i++
+    $outPath = Join-Path $OutDir $f.Name
+    Write-Output "$($f.Name) -> $outPath"
+    $bmp = [System.Drawing.Bitmap]::FromFile($f.FullName)
+    $clone = New-Object System.Drawing.Bitmap($bmp.Width, $bmp.Height, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+    $g = [System.Drawing.Graphics]::FromImage($clone)
+    $g.DrawImage($bmp, 0, 0)
+    $g.Dispose()
+    $bmp.Dispose()
+    $cropRect = ConvertTo-TransparentBackground $clone $Threshold
+    $cropped = $clone.Clone($cropRect, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+    $clone.Dispose()
+    $cropped.Save("$outPath.tmp.png", [System.Drawing.Imaging.ImageFormat]::Png)
+    $cropped.Dispose()
+    Move-Item -Force "$outPath.tmp.png" $outPath
+  }
+  Write-Output "Listo: $i cartas con fondo transparente en $OutDir"
 }

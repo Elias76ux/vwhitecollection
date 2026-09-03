@@ -1,49 +1,50 @@
 const CARDS = [
   // Mundial 2026 (stickers "Extra Sticker" FIFA World Cup 26, selecciones nacionales)
-  { id: "mgk-001", category: "mundial", name: "Moisés Caicedo — Ecuador", description: "Sticker Extra FIFA World Cup 26 · Selección de Ecuador.", price: 6, img: "images/cards/mgk-001.png" },
-  { id: "mgk-002", category: "mundial", name: "Raúl Jiménez — México", description: "Sticker Extra FIFA World Cup 26 · Selección de México.", price: 6, img: "images/cards/mgk-002.png" },
-  { id: "mgk-027", category: "mundial", name: "Cristiano Ronaldo — Portugal", description: "Sticker Extra FIFA World Cup 26 · Selección de Portugal.", price: 15, img: "images/cards/mgk-027.png" },
-  { id: "mgk-050", category: "mundial", name: "Luka Modrić — Croacia", description: "Sticker Extra FIFA World Cup 26 · Selección de Croacia.", price: 10, img: "images/cards/mgk-050.png" },
-  { id: "mgk-082", category: "mundial", name: "Luka Modrić — Croacia (variante)", description: "Sticker Extra FIFA World Cup 26 · Selección de Croacia.", price: 10, img: "images/cards/mgk-082.png" },
-  { id: "mgk-076", category: "mundial", name: "Alphonso Davies — Canadá", description: "Sticker Extra FIFA World Cup 26 · Selección de Canadá.", price: 7, img: "images/cards/mgk-076.png" },
-  { id: "mgk-092", category: "mundial", name: "Kevin De Bruyne — Bélgica", description: "Sticker Extra FIFA World Cup 26 · Selección de Bélgica.", price: 8, img: "images/cards/mgk-092.png" },
-  { id: "mgk-094", category: "mundial", name: "Cody Gakpo — Países Bajos", description: "Sticker Extra FIFA World Cup 26 · Selección de Países Bajos.", price: 7, img: "images/cards/mgk-094.png" },
+  { id: "mgk-001", category: "mundial", name: "Moisés Caicedo — Ecuador", description: "Sticker Extra FIFA World Cup 26 · Selección de Ecuador.", price: 6, img: "images/cards/mgk-001.png", priceUngraded: "$1–5 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-002", category: "mundial", name: "Raúl Jiménez — México", description: "Sticker Extra FIFA World Cup 26 · Selección de México.", price: 6, img: "images/cards/mgk-002.png", priceUngraded: "$1–5 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-027", category: "mundial", name: "Cristiano Ronaldo — Portugal", description: "Sticker Extra FIFA World Cup 26 · Selección de Portugal.", price: 15, img: "images/cards/mgk-027.png", priceUngraded: "≈$100 (dato con reservas, muy poco volumen de venta)", pricePSA: "PSA 9: ≈$100 (dato poco fiable, solo 1 venta al año)" },
+  { id: "mgk-050", category: "mundial", name: "Luka Modrić — Croacia", description: "Sticker Extra FIFA World Cup 26 · Selección de Croacia.", price: 10, img: "images/cards/mgk-050.png", priceUngraded: "$8,34 (dato real, paralelo Gold)", pricePSA: "Próximamente" },
+  { id: "mgk-076", category: "mundial", name: "Alphonso Davies — Canadá", description: "Sticker Extra FIFA World Cup 26 · Selección de Canadá.", price: 7, img: "images/cards/mgk-076.png", priceUngraded: "$1,25 (dato real)", pricePSA: "PSA 9: $16,73 (paralelo Bronze) · PSA 10: $21,62 (paralelo Gold)" },
+  { id: "mgk-094", category: "mundial", name: "Cody Gakpo — Países Bajos", description: "Sticker Extra FIFA World Cup 26 · Selección de Países Bajos.", price: 7, img: "images/cards/mgk-094.png", priceUngraded: "$1–5 estimado", pricePSA: "Próximamente" },
 
   // Megacracks 2026 (MGK 2025/26, LaLiga)
-  { id: "mgk-003", category: "megacracks", name: "Etta Eyong — Nuevo Fichaje", description: "Carta Nuevo Fichaje · FC Barcelona.", price: 8, img: "images/cards/mgk-003.png" },
-  { id: "mgk-006", category: "megacracks", name: "Nico Williams — Special One Gold", description: "Inserto dorado Special One · Athletic Club.", price: 22, img: "images/cards/mgk-006.png" },
-  { id: "mgk-007", category: "megacracks", name: "Cazorla — Élite", description: "Inserto Élite MGK 2025/26.", price: 20, img: "images/cards/mgk-007.png" },
-  { id: "mgk-010", category: "megacracks", name: "Rashford — Nuevo Fichaje", description: "Carta Nuevo Fichaje · FC Barcelona.", price: 9, img: "images/cards/mgk-010.png" },
-  { id: "mgk-015", category: "megacracks", name: "Mastantuono — Top Fichaje Edición Limitada", description: "Inserto Top Fichaje Edición Limitada · Real Madrid.", price: 30, img: "images/cards/mgk-015.png" },
-  { id: "mgk-016", category: "megacracks", name: "Mastantuono — Nuevo Fichaje", description: "Carta Nuevo Fichaje · Real Madrid.", price: 9, img: "images/cards/mgk-016.png" },
-  { id: "mgk-019", category: "megacracks", name: "Pedri — Special One Gold", description: "Inserto dorado Special One · FC Barcelona.", price: 22, img: "images/cards/mgk-019.png" },
-  { id: "mgk-020", category: "megacracks", name: "Bardghji — Nuevo Fichaje", description: "Carta Nuevo Fichaje · FC Barcelona.", price: 8, img: "images/cards/mgk-020.png" },
-  { id: "mgk-021", category: "megacracks", name: "Cubarsí — Nuevo Fichaje", description: "Carta Nuevo Fichaje · FC Barcelona.", price: 8, img: "images/cards/mgk-021.png" },
-  { id: "mgk-022", category: "megacracks", name: "Joan García — Zona VIP Power", description: "Inserto Zona VIP Power #13 · FC Barcelona.", price: 18, img: "images/cards/mgk-022.png" },
-  { id: "mgk-024", category: "megacracks", name: "Rashford — Vértigo", description: "Inserto Vértigo · FC Barcelona.", price: 16, img: "images/cards/mgk-024.png" },
-  { id: "mgk-025", category: "megacracks", name: "FlashBack — Atlético de Madrid", description: "Inserto FlashBack \"Parecidos más que razonables\" · Atlético de Madrid.", price: 14, img: "images/cards/mgk-025.png" },
-  { id: "mgk-029", category: "megacracks", name: "Raphinha — Special One Black", description: "Inserto Special One Black · FC Barcelona.", price: 20, img: "images/cards/mgk-029.png" },
-  { id: "mgk-031", category: "megacracks", name: "Joan García — Nuevo Fichaje", description: "Carta Nuevo Fichaje · FC Barcelona.", price: 8, img: "images/cards/mgk-031.png" },
-  { id: "mgk-043", category: "megacracks", name: "Dro", description: "Carta MGK 2025/26 · FC Barcelona.", price: 8, img: "images/cards/mgk-043.png" },
-  { id: "mgk-044", category: "megacracks", name: "Gerard Martín", description: "Carta MGK 2025/26 · FC Barcelona.", price: 8, img: "images/cards/mgk-044.png" },
-  { id: "mgk-047", category: "megacracks", name: "Rashford — Vértigo Power", description: "Inserto Vértigo Power · FC Barcelona.", price: 18, img: "images/cards/mgk-047.png" },
-  { id: "mgk-048", category: "megacracks", name: "Gavi — Special One Black", description: "Inserto Special One Black · FC Barcelona.", price: 20, img: "images/cards/mgk-048.png" },
-  { id: "mgk-054", category: "megacracks", name: "Víctor Muñoz — Vértigo Power", description: "Inserto Vértigo Power · FC Barcelona.", price: 18, img: "images/cards/mgk-054.png" },
-  { id: "mgk-056", category: "megacracks", name: "FlashBack Anthology — delanteros leyenda", description: "Inserto FlashBack Anthology · Real Madrid.", price: 14, img: "images/cards/mgk-056.png" },
-  { id: "mgk-060", category: "megacracks", name: "Carreras — Vértigo", description: "Inserto Vértigo · Real Madrid.", price: 16, img: "images/cards/mgk-060.png" },
-  { id: "mgk-062", category: "megacracks", name: "Cazorla — Élite \"Mago al cuadrado\"", description: "Inserto Élite #507.", price: 20, img: "images/cards/mgk-062.png" },
-  { id: "mgk-064", category: "megacracks", name: "Carreras — Vértigo Power", description: "Inserto Vértigo Power · Real Madrid.", price: 18, img: "images/cards/mgk-064.png" },
-  { id: "mgk-065", category: "megacracks", name: "Víctor Muñoz — Vértigo", description: "Inserto Vértigo · FC Barcelona.", price: 16, img: "images/cards/mgk-065.png" },
-  { id: "mgk-066", category: "megacracks", name: "FlashBack — Ronaldinho · Raphinha", description: "Inserto FlashBack \"Parecidos más que razonables\" · FC Barcelona.", price: 16, img: "images/cards/mgk-066.png" },
-  { id: "mgk-072", category: "megacracks", name: "Mbappé — Special One Gold", description: "Inserto dorado Special One · Real Madrid.", price: 24, img: "images/cards/mgk-072.png" },
-  { id: "mgk-077", category: "megacracks", name: "Mastantuono — Special One Black", description: "Inserto Special One Black · Real Madrid.", price: 20, img: "images/cards/mgk-077.png" },
-  { id: "mgk-079", category: "megacracks", name: "Fermín", description: "Carta MGK 2025/26 · FC Barcelona.", price: 8, img: "images/cards/mgk-079.png" },
-  { id: "mgk-080", category: "megacracks", name: "Rashford — Special One Black", description: "Inserto Special One Black · FC Barcelona.", price: 20, img: "images/cards/mgk-080.png" },
-  { id: "mgk-083", category: "megacracks", name: "Mbappé — Élite", description: "Inserto Élite · Real Madrid.", price: 20, img: "images/cards/mgk-083.png" },
-  { id: "mgk-088", category: "megacracks", name: "FlashBack — Benzema · Mbappé", description: "Inserto FlashBack · Real Madrid.", price: 16, img: "images/cards/mgk-088.png" },
-  { id: "mgk-090", category: "megacracks", name: "Trent Alexander-Arnold — Nuevo Fichaje", description: "Carta Nuevo Fichaje · Real Madrid.", price: 9, img: "images/cards/mgk-090.png" },
-  { id: "mgk-093", category: "megacracks", name: "FlashBack — Xavi · Pedri", description: "Inserto FlashBack \"Parecidos más que razonables\" · FC Barcelona.", price: 14, img: "images/cards/mgk-093.png" },
-  { id: "mgk-097", category: "megacracks", name: "FlashBack — Jordi Alba · Balde", description: "Inserto FlashBack · FC Barcelona.", price: 14, img: "images/cards/mgk-097.png" },
+  { id: "mgk-003", category: "megacracks", name: "Etta Eyong — Nuevo Fichaje", description: "Carta Nuevo Fichaje · FC Barcelona.", price: 8, img: "images/cards/mgk-003.png", priceUngraded: "€1–2 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-006", category: "megacracks", name: "Nico Williams — Special One Gold", description: "Inserto dorado Special One · Athletic Club.", price: 22, img: "images/cards/mgk-006.png", priceUngraded: "€10–20 (ancla real: 14,99€)", pricePSA: "Próximamente" },
+  { id: "mgk-007", category: "megacracks", name: "Cazorla — Élite Power", description: "Inserto Élite Power (P507) · Real Oviedo.", price: 20, img: "images/cards/mgk-007.png", priceUngraded: "€10–20 (ancla real: 19,99€)", pricePSA: "Próximamente" },
+  { id: "mgk-010", category: "megacracks", name: "Rashford — Nuevo Fichaje", description: "Carta Nuevo Fichaje · FC Barcelona.", price: 9, img: "images/cards/mgk-010.png", priceUngraded: "€1–3 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-015", category: "megacracks", name: "Mastantuono — Top Fichaje Edición Limitada", description: "Inserto Top Fichaje Edición Limitada · Real Madrid.", price: 30, img: "images/cards/mgk-015.png", priceUngraded: "€9,99 (dato real)", pricePSA: "Próximamente" },
+  { id: "mgk-016", category: "megacracks", name: "Mastantuono — Nuevo Fichaje", description: "Carta Nuevo Fichaje · Real Madrid.", price: 9, img: "images/cards/mgk-016.png", priceUngraded: "€2–5 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-019", category: "megacracks", name: "Pedri — Special One Gold", description: "Inserto dorado Special One · FC Barcelona.", price: 22, img: "images/cards/mgk-019.png", priceUngraded: "€5–20 estimado (venta reciente confirmada)", pricePSA: "Próximamente" },
+  { id: "mgk-020", category: "megacracks", name: "Bardghji — Nuevo Fichaje", description: "Carta Nuevo Fichaje · FC Barcelona.", price: 8, img: "images/cards/mgk-020.png", priceUngraded: "€1–3 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-021", category: "megacracks", name: "Cubarsí — Top Revelación Edición Limitada", description: "Inserto Top Revelación Edición Limitada · FC Barcelona.", price: 8, img: "images/cards/mgk-021.png", priceUngraded: "€1,49 (dato real)", pricePSA: "Próximamente" },
+  { id: "mgk-022", category: "megacracks", name: "Joan García — Zona VIP Power", description: "Inserto Zona VIP Power #13 · FC Barcelona.", price: 18, img: "images/cards/mgk-022.png", priceUngraded: "€1–4 (comparables reales: 0,95–3,88€)", pricePSA: "Próximamente" },
+  { id: "mgk-024", category: "megacracks", name: "Rashford — Vértigo", description: "Inserto Vértigo · FC Barcelona.", price: 16, img: "images/cards/mgk-024.png", priceUngraded: "€1–3 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-025", category: "megacracks", name: "FlashBack — Atlético de Madrid", description: "Inserto FlashBack \"Parecidos más que razonables\" · Atlético de Madrid.", price: 14, img: "images/cards/mgk-025.png", priceUngraded: "€2–6 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-029", category: "megacracks", name: "Raphinha — Special One Black", description: "Inserto Special One Black · FC Barcelona.", price: 20, img: "images/cards/mgk-029.png", priceUngraded: "€5 (dato real)", pricePSA: "Próximamente" },
+  { id: "mgk-031", category: "megacracks", name: "Joan García — Nuevo Fichaje", description: "Carta Nuevo Fichaje · FC Barcelona.", price: 8, img: "images/cards/mgk-031.png", priceUngraded: "€1–3 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-043", category: "megacracks", name: "Dro", description: "Carta MGK 2025/26 · FC Barcelona.", price: 8, img: "images/cards/mgk-043.png", priceUngraded: "€1–3 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-044", category: "megacracks", name: "Gerard Martín", description: "Carta MGK 2025/26 · FC Barcelona.", price: 8, img: "images/cards/mgk-044.png", priceUngraded: "€1–3 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-047", category: "megacracks", name: "Rashford — Vértigo Power", description: "Inserto Vértigo Power · FC Barcelona.", price: 18, img: "images/cards/mgk-047.png", priceUngraded: "€1–3 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-048", category: "megacracks", name: "Gavi — Special One Black", description: "Inserto Special One Black · FC Barcelona.", price: 20, img: "images/cards/mgk-048.png", priceUngraded: "€4–9,99 (dato real, varios anuncios)", pricePSA: "Próximamente" },
+  { id: "mgk-054", category: "megacracks", name: "Víctor Muñoz — Vértigo Power", description: "Inserto Vértigo Power · FC Barcelona.", price: 18, img: "images/cards/mgk-054.png", priceUngraded: "€1–3 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-056", category: "megacracks", name: "FlashBack Anthology — delanteros leyenda", description: "Inserto FlashBack Anthology · Real Madrid.", price: 14, img: "images/cards/mgk-056.png", priceUngraded: "€5 (dato real)", pricePSA: "Próximamente" },
+  { id: "mgk-060", category: "megacracks", name: "Carreras — Vértigo", description: "Inserto Vértigo · Real Madrid.", price: 16, img: "images/cards/mgk-060.png", priceUngraded: "€1–3 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-064", category: "megacracks", name: "Carreras — Vértigo Power", description: "Inserto Vértigo Power · Real Madrid.", price: 18, img: "images/cards/mgk-064.png", priceUngraded: "€1–3 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-065", category: "megacracks", name: "Víctor Muñoz — Vértigo", description: "Inserto Vértigo · FC Barcelona.", price: 16, img: "images/cards/mgk-065.png", priceUngraded: "€1–3 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-066", category: "megacracks", name: "FlashBack — Ronaldinho · Raphinha", description: "Inserto FlashBack \"Parecidos más que razonables\" · FC Barcelona.", price: 16, img: "images/cards/mgk-066.png", priceUngraded: "€4 (dato real)", pricePSA: "Próximamente" },
+  { id: "mgk-072", category: "megacracks", name: "Mbappé — Special One Gold", description: "Inserto dorado Special One · Real Madrid.", price: 24, img: "images/cards/mgk-072.png", priceUngraded: "€15–25 estimado (venta comparable 5–20€ + demanda alta)", pricePSA: "PSA 9: $72 (venta 09/03/2026) · PSA 10: $85 (venta 30/04/2026, población 1/8)" },
+  { id: "mgk-077", category: "megacracks", name: "Mastantuono — Special One Black", description: "Inserto Special One Black · Real Madrid.", price: 20, img: "images/cards/mgk-077.png", priceUngraded: "€5–15 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-079", category: "megacracks", name: "Fermín", description: "Carta MGK 2025/26 · FC Barcelona.", price: 8, img: "images/cards/mgk-079.png", priceUngraded: "€1–3 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-080", category: "megacracks", name: "Rashford — Special One Black", description: "Inserto Special One Black · FC Barcelona.", price: 20, img: "images/cards/mgk-080.png", priceUngraded: "€4–10 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-083", category: "megacracks", name: "Mbappé — Élite", description: "Inserto Élite · Real Madrid.", price: 20, img: "images/cards/mgk-083.png", priceUngraded: "€5 (dato real)", pricePSA: "Próximamente" },
+  { id: "mgk-088", category: "megacracks", name: "FlashBack — Benzema · Mbappé", description: "Inserto FlashBack · Real Madrid.", price: 16, img: "images/cards/mgk-088.png", priceUngraded: "€4–6 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-090", category: "megacracks", name: "Trent Alexander-Arnold — Nuevo Fichaje", description: "Carta Nuevo Fichaje · Real Madrid.", price: 9, img: "images/cards/mgk-090.png", priceUngraded: "€2–5 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-093", category: "megacracks", name: "FlashBack — Xavi · Pedri", description: "Inserto FlashBack \"Parecidos más que razonables\" · FC Barcelona.", price: 14, img: "images/cards/mgk-093.png", priceUngraded: "€4–6 estimado", pricePSA: "Próximamente" },
+  { id: "mgk-097", category: "megacracks", name: "FlashBack — Jordi Alba · Balde", description: "Inserto FlashBack · FC Barcelona.", price: 14, img: "images/cards/mgk-097.png", priceUngraded: "€3–5 estimado", pricePSA: "Próximamente" },
+
+  // Otras colecciones (Panini Calciatori 2025/26, Serie A — no son de Megacracks ni del Mundial)
+  { id: "mgk-082", category: "otras", name: "Luka Modrić — AC Milan", description: "Sticker Panini Calciatori 2025/26 · Serie A · AC Milan #322.", price: 10, img: "images/cards/mgk-082.png", priceUngraded: "$1,87 (dato real)", pricePSA: "Próximamente" },
+  { id: "mgk-092", category: "otras", name: "Kevin De Bruyne — Nápoles", description: "Sticker Panini Calciatori 2025/26 · Serie A · Nápoles #26.", price: 8, img: "images/cards/mgk-092.png", priceUngraded: "$1–3 estimado", pricePSA: "Próximamente" },
 ];
 
 const CART_STORAGE_KEY = "vwc_cart";
@@ -77,6 +78,12 @@ function renderCards(filter) {
   grid.querySelectorAll(".card-buy").forEach(btn => {
     btn.addEventListener("click", () => addToCart(btn.dataset.id));
   });
+  grid.querySelectorAll(".card-info-btn").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      openPriceModal(btn.dataset.id);
+    });
+  });
 }
 
 function cardTemplate(card) {
@@ -94,12 +101,45 @@ function cardTemplate(card) {
         <h3 class="card-name">${card.name}</h3>
         <p class="card-desc">${card.description}</p>
         <div class="card-footer">
-          <span class="card-price">${formatPrice(card.price)}</span>
+          <button class="card-info-btn" type="button" data-id="${card.id}" aria-haspopup="dialog" aria-controls="priceModal">Valoración</button>
           <button class="card-buy" type="button" data-id="${card.id}">Añadir</button>
         </div>
       </div>
     </article>
   `;
+}
+
+/* Modal de valoración de mercado (precio sin gradear / PSA) */
+
+function openPriceModal(cardId) {
+  const card = CARDS.find(c => c.id === cardId);
+  if (!card) return;
+
+  document.getElementById("priceModalTitle").textContent = card.name;
+  document.getElementById("priceModalBody").innerHTML = `
+    <p class="price-modal-row"><span>Sin gradear</span><strong>${card.priceUngraded || "Próximamente"}</strong></p>
+    <p class="price-modal-row"><span>Gradeado (PSA)</span><strong>${card.pricePSA || "Próximamente"}</strong></p>
+    <p class="price-modal-note">Valoración de mercado orientativa (venta entre coleccionistas), no es el precio de venta de VWHITECOLLECTION ni una garantía de cotización futura.</p>
+  `;
+
+  const modal = document.getElementById("priceModal");
+  modal.hidden = false;
+  modal.setAttribute("aria-hidden", "false");
+  showOverlay();
+}
+
+function closePriceModal() {
+  const modal = document.getElementById("priceModal");
+  modal.hidden = true;
+  modal.setAttribute("aria-hidden", "true");
+  hideOverlay();
+}
+
+function initPriceModal() {
+  document.getElementById("priceCloseBtn").addEventListener("click", closePriceModal);
+  document.getElementById("overlay").addEventListener("click", () => {
+    if (!document.getElementById("priceModal").hidden) closePriceModal();
+  });
 }
 
 function attachCardTiltHandlers() {
@@ -377,4 +417,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   initCart();
   initCheckout();
+  initPriceModal();
 });

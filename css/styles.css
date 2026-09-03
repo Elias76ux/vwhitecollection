@@ -1,17 +1,22 @@
 :root {
-  --primary: #34495e;
-  --primary-dark: #263746;
-  --primary-darker: #172029;
-  --primary-light: #64798c;
+  /* Paleta "casa de subastas": borgoña profundo + oro antiguo.
+     Sustituye al azul anterior (fallaba en elegancia y en contraste). El
+     borgoña muy oscuro da un fondo tipo terciopelo/joyería de alta gama y
+     resuena con el motivo de corazón/latido del logo (pasión, vino,
+     sello de cera); el oro antiguo aporta el acento premium clásico. */
+  --primary: #5a1a2c;
+  --primary-dark: #3a0f1c;
+  --primary-darker: #180910;
+  --primary-light: #8f3a55;
   --white: #ffffff;
   --off-white: #f6f5f2;
-  --text-dark: #1e2126;
-  --text-muted: #5b6572;
-  --gold: #b6924f;
-  --border: rgba(52, 73, 94, 0.15);
-  --shadow: 0 12px 30px rgba(23, 32, 41, 0.15);
+  --text-dark: #241419;
+  --text-muted: #6b5a5e;
+  --gold: #c9a24d;
+  --border: rgba(90, 26, 44, 0.15);
+  --shadow: 0 12px 30px rgba(24, 9, 16, 0.25);
   --radius: 14px;
-  --font-display: "Anton", sans-serif;
+  --font-display: "Cinzel", serif;
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
@@ -54,7 +59,7 @@ section {
 }
 
 .site-header.is-scrolled {
-  box-shadow: 0 6px 20px rgba(23, 32, 41, 0.35);
+  box-shadow: 0 6px 20px rgba(24, 9, 16, 0.45);
 }
 
 .header-inner {
@@ -67,28 +72,42 @@ section {
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
   color: var(--white);
 }
 
-.logo-icon {
-  width: 22px;
-  height: 30px;
-  color: var(--gold);
-}
-
+/* Wordmark: el propio logo (trazo en V con corazón/latido) ocupa el
+   lugar de la letra "V" inicial, integrado en la misma línea que
+   "White Collections" en vez de ir como icono aparte al lado. */
 .brand-mark {
   font-family: var(--font-display);
+  font-weight: 700;
   font-size: 1.3rem;
   letter-spacing: .5px;
   display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .brand-mark em {
   font-style: normal;
 }
 
-.b-v, .b-collections { color: var(--gold); }
+/* El PNG es un trazo negro sobre fondo transparente: se convierte a
+   blanco puro (brightness(0) invert(1) es una conversión exacta, sin
+   aproximación de color) para que funcione como una "V" más del
+   wordmark sobre el fondo borgoña oscuro, con un halo dorado sutil que
+   la conecta con el acento dorado de "Collections". El corte
+   transparente del corazón/latido dentro de la V deja ver el fondo
+   oscuro, como un sello grabado. Se dimensiona más alta que el texto
+   a propósito, como una inicial capitular. */
+.brand-mark-v {
+  height: 40px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(201, 162, 77, .55));
+}
+
+.b-collections { color: var(--gold); }
 .b-white { color: var(--white); }
 
 .main-nav {
@@ -266,6 +285,7 @@ section {
 
 .hero h1 {
   font-family: var(--font-display);
+  font-weight: 900;
   font-size: clamp(2.6rem, 5vw, 4.2rem);
   line-height: 1.05;
   letter-spacing: .5px;
@@ -303,7 +323,7 @@ section {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(201, 162, 75, 0.4);
+  box-shadow: 0 10px 24px rgba(201, 162, 77, 0.4);
 }
 
 .btn-outline {
@@ -322,6 +342,7 @@ section {
 
 .section-heading h2 {
   font-family: var(--font-display);
+  font-weight: 700;
   font-size: clamp(2rem, 3.5vw, 2.8rem);
   color: var(--primary);
   margin: 0 0 12px;
@@ -396,7 +417,7 @@ section {
 }
 
 .card-media img {
-  width: 100%; height: 100%; object-fit: contain;
+  width: 100%; height: 100%; object-fit: contain; object-position: center;
   padding: 14px;
   filter: drop-shadow(0 8px 14px rgba(0,0,0,0.35));
 }
@@ -432,6 +453,24 @@ section {
 
 .card:hover .card-shine { opacity: 1; }
 
+.card-info-btn {
+  background: none;
+  border: 1.5px solid var(--gold);
+  color: var(--gold);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+
+.card-info-btn:hover {
+  background: var(--gold);
+  color: var(--primary-darker);
+}
+
 .card-body { padding: 18px 18px 20px; }
 
 .card-name {
@@ -452,17 +491,6 @@ section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.card-price {
-  font-weight: 700;
-  color: var(--primary);
-  font-size: 1.05rem;
-}
-
-.card-price small {
-  color: var(--gold);
-  font-weight: 600;
 }
 
 .card-buy {
@@ -533,6 +561,7 @@ section {
 
 .event-card h3 {
   font-family: var(--font-display);
+  font-weight: 700;
   font-size: 1.4rem;
   letter-spacing: .3px;
   margin: 0 0 10px;
@@ -574,6 +603,7 @@ section {
 
 .comunidad-text h2 {
   font-family: var(--font-display);
+  font-weight: 700;
   font-size: clamp(2rem, 3.5vw, 2.6rem);
   margin: 0 0 18px;
   letter-spacing: .5px;
@@ -910,7 +940,7 @@ section {
   cursor: pointer;
 }
 
-.profile-nav-btn:hover { background: rgba(52, 73, 94, 0.08); }
+.profile-nav-btn:hover { background: rgba(90, 26, 44, 0.08); }
 
 .profile-nav-btn.is-active { background: var(--primary); color: var(--white); }
 
@@ -927,7 +957,7 @@ section {
   overflow-y: auto;
 }
 
-.profile-content h4 { margin: 0 0 18px; font-family: var(--font-display); color: var(--primary-darker); letter-spacing: .3px; }
+.profile-content h4 { margin: 0 0 18px; font-family: var(--font-display); font-weight: 700; color: var(--primary-darker); letter-spacing: .3px; }
 
 .profile-desc { color: var(--text-muted); font-size: .88rem; margin: -10px 0 16px; }
 
@@ -1074,6 +1104,51 @@ section {
 
 .legal-text p { margin: 0 0 10px; line-height: 1.6; }
 
+/* Valoración de mercado (sin gradear / PSA) */
+
+.price-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.price-modal[hidden] { display: none; }
+
+.price-modal-inner {
+  background: var(--white);
+  border-radius: var(--radius);
+  width: min(420px, 100%);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.price-modal-body { padding: 20px 24px 24px; }
+
+.price-modal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  margin: 0;
+}
+
+.price-modal-row span { color: var(--text-muted); font-size: .85rem; }
+
+.price-modal-row strong { color: var(--primary); text-align: right; }
+
+.price-modal-note {
+  margin: 16px 0 0;
+  font-size: .74rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
 @media (max-width: 640px) {
   .profile-modal-body { flex-direction: column; }
   .profile-nav { width: 100%; flex-direction: row; flex-wrap: wrap; border-right: none; border-bottom: 1px solid var(--border); }
@@ -1090,7 +1165,7 @@ section {
   color: var(--white);
 }
 
-.cart-drawer-head h3 { margin: 0; font-family: var(--font-display); font-size: 1.3rem; letter-spacing: .3px; }
+.cart-drawer-head h3 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; letter-spacing: .3px; }
 
 .icon-btn {
   background: none;

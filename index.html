@@ -7,7 +7,7 @@
 <meta name="description" content="Colección de cartas Megacracks 2026 y más. Descubre nuestras cartas y únete a la comunidad.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -15,13 +15,10 @@
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a href="#inicio" class="logo">
-      <svg class="logo-icon" viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect x="1" y="1" width="22" height="30" rx="3" fill="currentColor"/>
-        <rect x="4.5" y="5" width="15" height="10" rx="1.2" fill="var(--white)" opacity="0.9"/>
-        <rect x="4.5" y="18" width="15" height="2" rx="1" fill="var(--white)" opacity="0.7"/>
-        <rect x="4.5" y="22" width="9" height="2" rx="1" fill="var(--white)" opacity="0.7"/>
-      </svg>
-      <span class="brand-mark"><em class="b-v">V</em><em class="b-white">White</em><em class="b-collections">Collections</em></span>
+      <span class="brand-mark">
+        <img class="brand-mark-v" src="images/logo-v.png" alt="V">
+        <em class="b-white">White</em><em class="b-collections">Collections</em>
+      </span>
     </a>
 
     <nav class="main-nav" id="mainNav">
@@ -461,6 +458,16 @@
         derecho.
       </p>
     </div>
+  </div>
+</div>
+
+<div class="price-modal" id="priceModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="priceModalTitle" hidden>
+  <div class="price-modal-inner">
+    <div class="cart-drawer-head">
+      <h3 id="priceModalTitle">Valoración de mercado</h3>
+      <button class="icon-btn" id="priceCloseBtn" aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="price-modal-body" id="priceModalBody"></div>
   </div>
 </div>
 

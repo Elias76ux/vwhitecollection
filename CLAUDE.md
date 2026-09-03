@@ -29,30 +29,60 @@ datos de tarjeta a un servidor propio sin tokenización del proveedor.
 
 ## Estado actual de la web
 
-- Sección hero con fondo grafito/azul marino apagado (paleta seria y de
-  tonos tenues definida en `:root` de `css/styles.css`: `--primary` en tono
-  azul grafito y `--gold` en dorado apagado) con barrido de brillo animado
-  vía `::before` (ver `.hero::before`/`.comunidad::before` en
-  `css/styles.css`) y animación de cartas flotantes.
-- Logo/título con tipografía Anton y wordmark de colores: "V" y
-  "Collections" en dorado, "White" en blanco (ver `.brand-mark` en
-  `css/styles.css`, aplicado en el header de `index.html`).
-- Sección "Cartas" con 42 cartas reales en `js/script.js` (array `CARDS`),
+- Sección hero con fondo borgoña profundo (`--primary: #5a1a2c`,
+  `--primary-dark: #3a0f1c`, `--primary-darker: #180910`, definidos en
+  `:root` de `css/styles.css`) y `--gold: #c9a24d` como acento dorado
+  antiguo — paleta tipo casa de subastas/joyería (probado antes un azul
+  que el usuario rechazó por no verse lujoso). El texto blanco sobre
+  `--primary` mantiene contraste AA (ratio ampliamente >4.5:1: el
+  borgoña es lo bastante oscuro). Barrido de brillo animado vía `::before`
+  (ver `.hero::before`/`.comunidad::before` en `css/styles.css`) y
+  animación de cartas flotantes.
+- Logo/wordmark con tipografía Cinzel (antes Anton; cargada vía Google
+  Fonts en el `<head>` de `index.html`, variable `--font-display`) y el
+  propio icono `images/logo-v.png` (proporcionado por el usuario, no
+  generado) haciendo de letra "V" inicial dentro del wordmark —ya no va
+  como icono aparte a la izquierda—, seguido de "White" en blanco y
+  "Collections" en dorado (ver `.brand-mark`/`.brand-mark-v` en
+  `css/styles.css`, aplicado en el header de `index.html`). El PNG es un
+  trazo negro sobre fondo transparente; se convierte a blanco puro con
+  `filter: brightness(0) invert(1)` más un halo dorado sutil
+  (`drop-shadow`) para integrarlo en el fondo oscuro del header.
+- Sección "Cartas" con 41 cartas reales en `js/script.js` (array `CARDS`),
   fotografiadas por el usuario con fondo blanco de estudio (carpeta
-  `Pictures/`, JPG): 8 en "Mundial 2026" (stickers Extra Sticker FIFA World
-  Cup 26 de selecciones) y 34 en "Megacracks 2026" (cartas MGK 2025/26,
+  `Pictures/`, JPG): 6 en "Mundial 2026" (stickers Extra Sticker FIFA World
+  Cup 26 de selecciones), 33 en "Megacracks 2026" (cartas MGK 2025/26,
   varios jugadores/equipos de LaLiga — Barcelona, Real Madrid, Atlético,
-  Athletic). La pestaña "Otras colecciones" sigue vacía ("Próximamente").
-  Solo se muestran caras frontales: el usuario proporcionó el listado
-  exacto de fotos frontales (carpeta de Drive con 51 archivos, sin las
-  fotos de reverso) y con eso se depuraron 38 cartas que en realidad eran
-  fotos del reverso — varias de ellas sin el marcador "(dorso)" en el
-  nombre original, detectado comparando cada foto contra ese listado y
-  confirmado visualmente. Sus imágenes se borraron de `images/cards/`.
-  Nombres/descripciones identificados visualmente por Claude a partir de
-  las fotos — **revisar y confirmar con el usuario** las de nombre
-  incierto. Los precios son estimaciones de ejemplo (marcadas con "*" en
-  la web) y deben confirmarse.
+  Athletic) y 2 en "Otras colecciones" (stickers Panini Calciatori 2025/26,
+  Serie A italiana — ver más abajo). Solo se muestran caras frontales: el
+  usuario proporcionó el listado exacto de fotos frontales (carpeta de
+  Drive con 51 archivos, sin las fotos de reverso) y con eso se depuraron
+  38 cartas que en realidad eran fotos del reverso — varias de ellas sin
+  el marcador "(dorso)" en el nombre original, detectado comparando cada
+  foto contra ese listado y confirmado visualmente. Sus imágenes se
+  borraron de `images/cards/`. El usuario revisó el resto una a una (hoja
+  de contacto numerada) y pidió eliminar una carta adicional que sí era
+  reverso (mgk-062, "Cazorla — Élite Mago al cuadrado"); las 41 restantes
+  quedan confirmadas como frontales. Los precios de venta (`price`, los
+  que cobra VWHITECOLLECTION) son estimaciones de ejemplo (marcadas con
+  "*" en la web) y deben confirmarse.
+- Valoración de mercado por carta: cada carta tiene un botón "i" en la
+  imagen que abre `#priceModal` con el precio de mercado sin gradear y
+  gradeado (PSA), tomados de `C:\Users\arbaj\Downloads\cartas_valoracion.xlsx`
+  (investigación de mercado del usuario, no está en el repo) y guardados
+  como texto en los campos `priceUngraded`/`pricePSA` de cada carta en
+  `js/script.js`. Es un dato de mercado orientativo, independiente del
+  precio de venta (`price`) de la tienda — así se aclara en la nota del
+  propio modal. Cuando no hay ventas graded verificables (la mayoría),
+  `pricePSA` es "Próximamente"; hay datos PSA reales solo para Mbappé
+  Special One Gold (mgk-072) y Alphonso Davies Extra Sticker Gold
+  (mgk-076). Al cruzar esa hoja con el catálogo también se corrigieron
+  dos identificaciones erróneas: mgk-082 y mgk-092 no son stickers del
+  Mundial (estaban mal categorizados como "mundial") sino stickers de
+  Panini Calciatori 2025/26 (Serie A) de Modrić en el AC Milan y De
+  Bruyne en el Nápoles — se movieron a la categoría "otras" con nombre y
+  descripción corregidos; y mgk-021 (Cubarsí) era en realidad un inserto
+  "Top Revelación Edición Limitada", no una carta base "Nuevo Fichaje".
 - Fotos de cartas: dos flujos en `tools/procesar-cartas.ps1` según el tipo
   de foto de origen (ver cabecera del script para el uso completo):
   - `-Mode whitebg`: para fotos JPG sobre fondo claro/uniforme (como
@@ -65,6 +95,19 @@ datos de tarjeta a un servidor propio sin tokenización del proveedor.
   - `-Mode grid`: junta varias cartas ya procesadas en una hoja de contacto
     numerada, útil para revisar/leer muchas cartas de un vistazo antes de
     catalogarlas.
+  - `-Mode transparentbg`: para las 41 imágenes ya procesadas con
+    `-Mode whitebg` (carta dentro de su funda protectora, fondo blanco
+    sólido) — quita ese fondo blanco dejándolo transparente y recorta
+    ajustado a la funda. Usa flood fill desde los bordes de la imagen (no
+    un simple umbral de color global) para que solo se vuelva transparente
+    el fondo realmente conectado con el exterior, sin tocar blancos
+    interiores de la propia carta (bordes de sticker, camisetas blancas,
+    texturas de mármol claras, etc.) aunque coincidan en color con el
+    fondo. Es el modo usado actualmente para las imágenes de
+    `images/cards/`: ya no tienen fondo blanco, solo la funda con la
+    carta dentro sobre fondo transparente. `.card-media img` centra cada
+    imagen dentro de su recuadro con `object-fit: contain` +
+    `object-position: center` en `css/styles.css`.
   Salida final siempre en `images/cards/`.
 - Sección "Eventos" con la gala de premios al mejor coleccionista (fecha
   por confirmar) y un evento "Sorteo de cartas exclusivas" marcado como
